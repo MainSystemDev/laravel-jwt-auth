@@ -53,6 +53,8 @@ class JWTGenerateCommand extends Command
         }
 
         $this->laravel['config']['jwt.secret'] = $key;
+        $this->laravel['config']['jwt.encrypt_secret'] = $this->getRandomKey(64);
+        $this->laravel['config']['jwt.sign_secret'] = $this->getRandomKey(64);
 
         $this->info("jwt-auth secret [$key] set successfully.");
     }
@@ -60,11 +62,12 @@ class JWTGenerateCommand extends Command
     /**
      * Generate a random key for the JWT Auth secret.
      *
+     * @param int $len
      * @return string
      */
-    protected function getRandomKey()
+    protected function getRandomKey($len = 32)
     {
-        return Str::random(32);
+        return Str::random($len);
     }
 
     /**
