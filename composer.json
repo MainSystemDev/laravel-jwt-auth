@@ -1,21 +1,29 @@
 {
-    "name": "tymon/jwt-auth",
-    "description": "JSON Web Token Authentication for Laravel 4 and 5",
+    "name": "johnturingan/laravel-jwt-auth",
+    "description": "JSON Web Token Authentication for Laravel 4 and 5. Modification from Tymon's jwt-auth",
     "keywords": [
         "jwt",
         "auth",
         "authentication",
         "tymon",
         "laravel",
-        "json web token"
+        "json web token",
+        "json web encryption",
+        "jwe"
     ],
-    "homepage": "https://github.com/tymondesigns/jwt-auth",
+    "homepage": "https://github.com/johnturingan/laravel-jwt-auth",
     "license": "MIT",
     "authors": [
         {
-            "name": "Sean Tymon",
-            "email": "tymon148@gmail.com",
-            "homepage": "http://tymondesigns.com",
+            "name": "John Turingan",
+            "email": "john.turingan@gmail.com",
+            "homepage": "https://github.com/johnturingan",
+            "role": "Developer"
+        },
+        {
+            "name": "Rowen Pimentel",
+            "email": "rowenpimentel@gmail.com",
+            "homepage": "https://github.com/rowen17",
             "role": "Developer"
         }
     ],
