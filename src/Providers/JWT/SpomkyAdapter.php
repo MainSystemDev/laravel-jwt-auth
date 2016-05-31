@@ -10,6 +10,7 @@ namespace Tymon\JWTAuth\Providers\JWT;
 
 use Exception;
 use Jose\Factory\JWEFactory;
+use Jose\Factory\JWSFactory;
 use Jose\Object\JWE;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -17,36 +18,42 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 class SpomkyAdapter extends JWTProvider implements JWTInterface
 {
 
-    protected $jwe;
 
     /**
-     * SpomkyAdapter constructor.
-     * @param string $secret
-     * @param string $algo
-     * @param null $driver
-     */
-    function __construct($secret, $algo, $driver = null)
-    {
-        parent::__construct($secret, $algo);
-
-        $this->jwe = $driver ?: new JWE(['typ' => 'JWT', 'alg' => $algo]);
-    }
-
-    /**
-     * @param  array $payload
+     * Create a JSON Web Token.
+     *
      * @return string
+     * @throws \Tymon\JWTAuth\Exceptions\JWTException
      */
     public function encode(array $payload)
     {
-        // TODO: Implement encode() method.
+        try {
+
+
+
+        } catch (Exception $e) {
+            throw new JWTException('Could not create token: '.$e->getMessage());
+        }
     }
 
     /**
-     * @param  string $token
+     * Decode a JSON Web Token.
+     *
+     * @param  string  $token
      * @return array
+     * @throws \Tymon\JWTAuth\Exceptions\JWTException
      */
     public function decode($token)
     {
-        // TODO: Implement decode() method.
+        try {
+
+
+        } catch (Exception $e) {
+            throw new TokenInvalidException('Could not decode token: '.$e->getMessage());
+        }
+
+
+        return []; //return payload
+
     }
 }
