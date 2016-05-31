@@ -23,7 +23,8 @@
         "php": ">=5.4.0",
         "illuminate/support": "~5.0",
         "illuminate/http": "~5.0",
-        "namshi/jose": "5.0.*",
+        "Spomky-Labs/jose": "3.0.*",
+        "fgrosse/phpasn1": "dev-compat/php5-5 as v1.3.1",
         "nesbot/carbon": "~1.0"
     },
     "require-dev": {
