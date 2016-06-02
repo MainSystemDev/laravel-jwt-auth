@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'encrypt_secret' => env('JWT_ENCRYPT_SECRET', 'changeme'),
+    'encrypt_secret' => env('JWT_ENCRYPT_SECRET', 'xxx'),
 
     /*
     |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ return [
     | A helper command is provided for this: `php artisan jwt:generate`
     |
     */
-    'signature_secret' => env('JWT_SIGNATURE_SECRET', 'changeme'),
+    'signature_secret' => env('JWT_SIGNATURE_SECRET', 'yyy'),
 
     /*
     |--------------------------------------------------------------------------
