@@ -19,6 +19,8 @@ use Tymon\JWTAuth\Claims\Factory;
 use Illuminate\Support\ServiceProvider;
 use Tymon\JWTAuth\Commands\JWTGenerateCommand;
 use Tymon\JWTAuth\Validators\PayloadValidator;
+use Tymon\JWTAuth\Providers\Config\ConfigBagInterface;
+
 
 class JWTAuthServiceProvider extends ServiceProvider
 {
@@ -48,6 +50,10 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function bootBindings()
     {
+        $this->app[ConfigBagInterface::class] = function ($app) {
+            return $app['tymon.jwt.config'];
+        };
+
         $this->app['Tymon\JWTAuth\JWTAuth'] = function ($app) {
             return $app['tymon.jwt.auth'];
         };
@@ -97,6 +103,7 @@ class JWTAuthServiceProvider extends ServiceProvider
     public function register()
     {
         // register providers
+        $this->registerConfigProvider();
         $this->registerUserProvider();
         $this->registerJWTProvider();
         $this->registerAuthProvider();
@@ -112,6 +119,13 @@ class JWTAuthServiceProvider extends ServiceProvider
         $this->registerJWTCommand();
 
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'jwt');
+    }
+
+    protected function registerConfigProvider()
+    {
+        $this->app['tymon.jwt.config'] = $this->app->share(function ($app) {
+            return $this->getConfigInstance($this->config('providers.config'));
+        });
     }
 
     /**
@@ -131,11 +145,11 @@ class JWTAuthServiceProvider extends ServiceProvider
     {
         $this->app['tymon.jwt.provider.jwt'] = $this->app->share(function ($app) {
 
-            $secret = $this->config('secret');
-            $algo = $this->config('algo');
             $provider = $this->config('providers.jwt');
 
-            return $app->make($provider, [$secret, $algo]);
+            $configBag = $app['tymon.jwt.config'];
+
+            return $app->make($provider, [$configBag]);
         });
     }
 
