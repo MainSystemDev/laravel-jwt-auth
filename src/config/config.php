@@ -13,17 +13,26 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | JWT Authentication Secret
+    | JWT Encryption Secret
+    |--------------------------------------------------------------------------
+    |
+    | Don't forget to set this, as it will be used to encrypt your token claims.
+    | A helper command is provided for this: `php artisan jwt:generate`
+    |
+    */
+
+    'encrypt_secret' => env('JWT_ENCRYPT_SECRET'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | JWT Signature Secret
     |--------------------------------------------------------------------------
     |
     | Don't forget to set this, as it will be used to sign your tokens.
     | A helper command is provided for this: `php artisan jwt:generate`
     |
     */
-
-    'encrypt_secret' => env('JWT_ENCRYPT_SECRET', 'saH0gFSP4XM_tAP_a5rU9ooHbltwLiJpL4LLLnrqQPw'),
-
-    'sign_secret' => env('JWT_SIGN_SECRET', 'AyM1SysPpbyDfgZld3umj1qzKObwVMkoqQ-EstJQLr_T-1qS0gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr1Z9CAow'),
+    'signature_secret' => env('JWT_SIGNATURE_SECRET'),
 
     /*
     |--------------------------------------------------------------------------
@@ -53,19 +62,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | JWT hashing algorithm
+    | JWT encrypt hashing algorithm
     |--------------------------------------------------------------------------
     |
-    | Specify the hashing algorithm that will be used to sign the token.
-    |
-    | See here: https://github.com/namshi/jose/tree/2.2.0/src/Namshi/JOSE/Signer
-    | for possible values
+    | Specify the hashing algorithm that will be used to encrypt the token.
     |
     */
 
     'encrypt_algo' => env("JWT_ENCRYPT_ALGO", 'A256GCM'),
 
-    'sign_algo' => env("JWT_ENCRYPT_ALGO", 'HS256'),
+    /*
+    |--------------------------------------------------------------------------
+    | JWT signature hashing algorithm
+    |--------------------------------------------------------------------------
+    |
+    | Specify the hashing algorithm that will be used to sign the token.
+    |
+    */
+    'signature_algo' => env("JWT_SIGNATURE_ALGO", 'HS256'),
 
     /*
     |--------------------------------------------------------------------------
