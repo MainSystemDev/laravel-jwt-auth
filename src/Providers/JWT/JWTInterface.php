@@ -11,6 +11,8 @@
 
 namespace Tymon\JWTAuth\Providers\JWT;
 
+use Tymon\JWTAuth\Token;
+
 interface JWTInterface
 {
     /**
@@ -20,7 +22,7 @@ interface JWTInterface
     public function encode(array $payload);
 
     /**
-     * @param  string  $token
+     * @param  Token  $token
      * @return array
      */
     public function decode($token);

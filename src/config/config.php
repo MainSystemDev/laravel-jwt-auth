@@ -21,9 +21,9 @@ return [
     |
     */
 
-    'encrypt_secret' => env('JWT_SECRET', 'changeme'),
+    'encrypt_secret' => env('JWT_ENCRYPT_SECRET', 'saH0gFSP4XM_tAP_a5rU9ooHbltwLiJpL4LLLnrqQPw'),
 
-    'sign_secret' => env('JWT_SECRET', 'changeme'),
+    'sign_secret' => env('JWT_SIGN_SECRET', 'AyM1SysPpbyDfgZld3umj1qzKObwVMkoqQ-EstJQLr_T-1qS0gZH75aKtMN3Yj0iPS4hcgUuTwjAzZr1Z9CAow'),
 
     /*
     |--------------------------------------------------------------------------
@@ -63,7 +63,9 @@ return [
     |
     */
 
-    'algo' => 'HS256',
+    'encrypt_algo' => env("JWT_ENCRYPT_ALGO", 'A256GCM'),
+
+    'sign_algo' => env("JWT_ENCRYPT_ALGO", 'HS256'),
 
     /*
     |--------------------------------------------------------------------------
@@ -146,7 +148,7 @@ return [
         |
         */
 
-        'jwt' => 'Tymon\JWTAuth\Providers\JWT\NamshiAdapter',
+        'jwt' => 'Tymon\JWTAuth\Providers\JWT\SpomkyAdapter',
 
         /*
         |--------------------------------------------------------------------------
@@ -169,6 +171,16 @@ return [
         */
 
         'storage' => 'Tymon\JWTAuth\Providers\Storage\IlluminateCacheAdapter',
+
+        /*
+        |--------------------------------------------------------------------------
+        | Config Provider
+        |--------------------------------------------------------------------------
+        |
+        | Specify the provider that is used to store config
+        |
+        */
+        'config' => 'Tymon\JWTAuth\Providers\Config\IlluminateConfigAdapter'
 
     ],
 
