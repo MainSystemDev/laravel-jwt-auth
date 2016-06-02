@@ -38,25 +38,25 @@ class JWTGenerateCommand extends Command
      */
     public function fire()
     {
-        $key = $this->getRandomKey();
+        $encryptSecret = $this->getRandomKey(64);
+        $signatureKey = $this->getRandomKey(64);
 
         if ($this->option('show')) {
-            return $this->line('<comment>'.$key.'</comment>');
+            return $this->line('<comment>'.$encryptSecret.'</comment>');
         }
 
         $path = config_path('jwt.php');
 
         if (file_exists($path)) {
-            file_put_contents($path, str_replace(
-                $this->laravel['config']['jwt.secret'], $key, file_get_contents($path)
-            ));
+
+            $this->updateConfigFile('encrypt_secret', $encryptSecret, $path);
+            $this->updateConfigFile('signature_secret', $signatureKey, $path);
         }
 
-        $this->laravel['config']['jwt.secret'] = $key;
-        $this->laravel['config']['jwt.encrypt_secret'] = $this->getRandomKey(64);
-        $this->laravel['config']['jwt.sign_secret'] = $this->getRandomKey(64);
+        $this->laravel['config']['jwt.encrypt_secret'] = $encryptSecret;
+        $this->laravel['config']['jwt.signature_secret'] = $signatureKey;
 
-        $this->info("jwt-auth secret [$key] set successfully.");
+        $this->info("jwt-auth encrypt secret [$encryptSecret] and signature secret [$signatureKey] set successfully.");
     }
 
     /**
@@ -80,5 +80,19 @@ class JWTGenerateCommand extends Command
         return [
             ['show', null, InputOption::VALUE_NONE, 'Simply display the key instead of modifying files.'],
         ];
+    }
+
+    /**
+     * Update config file
+     *
+     * @param $key
+     * @param $value
+     * @param $path
+     */
+    protected function updateConfigFile($key, $value, $path)
+    {
+        file_put_contents($path, str_replace(
+            $this->laravel['config']["jwt.$key"], $value, file_get_contents($path)
+        ));
     }
 }

@@ -41,11 +41,11 @@ class SpomkyAdapter extends JWTProvider implements JWTInterface
      */
     public function __construct(ConfigBagInterface $configBag)
     {
-        parent::__construct($configBag->get('sign_secret'), $configBag->get('sign_algo'));
+        parent::__construct($configBag->get('signature_secret'), $configBag->get('signature_algo'));
 
         $this->signatureKey = $this->buildSignatureKey(
-            $configBag->get('sign_secret'),
-            $configBag->get('sign_algo')
+            $configBag->get('signature_secret'),
+            $configBag->get('signature_algo')
         );
 
         $this->encryptionKey = $this->buildEncryptionKey(
