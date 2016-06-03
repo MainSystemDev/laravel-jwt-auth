@@ -38,8 +38,8 @@ class JWTGenerateCommand extends Command
      */
     public function fire()
     {
-        $encryptSecret = $this->getRandomKey(64);
-        $signatureKey = $this->getRandomKey(64);
+        $encryptSecret = $this->getRandomKey(32);
+        $signatureKey = $this->getRandomKey(32);
 
         if ($this->option('show')) {
             return $this->line('<comment>'.$encryptSecret.'</comment>');
