@@ -123,7 +123,7 @@ class JWTAuthServiceProvider extends ServiceProvider
 
     protected function registerConfigProvider()
     {
-        $this->app['tymon.jwt.config'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.config', function ($app) {
             return $this->getConfigInstance($this->config('providers.config'));
         });
     }
@@ -133,7 +133,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerUserProvider()
     {
-        $this->app['tymon.jwt.provider.user'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.provider.user', function ($app) {
             return $app->make($this->config('providers.user'), [$app->make($this->config('user'))]);
         });
     }
@@ -143,7 +143,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerJWTProvider()
     {
-        $this->app['tymon.jwt.provider.jwt'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.provider.jwt', function ($app) {
 
             $provider = $this->config('providers.jwt');
 
@@ -158,7 +158,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerAuthProvider()
     {
-        $this->app['tymon.jwt.provider.auth'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.provider.auth', function ($app) {
             return $this->getConfigInstance($this->config('providers.auth'));
         });
     }
@@ -168,7 +168,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerStorageProvider()
     {
-        $this->app['tymon.jwt.provider.storage'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.provider.storage', function ($app) {
             return $this->getConfigInstance($this->config('providers.storage'));
         });
     }
@@ -188,7 +188,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerJWTManager()
     {
-        $this->app['tymon.jwt.manager'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.manager', function ($app) {
 
             $instance = new JWTManager(
                 $app['tymon.jwt.provider.jwt'],
@@ -205,7 +205,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerJWTAuth()
     {
-        $this->app['tymon.jwt.auth'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.auth', function ($app) {
 
             $auth = new JWTAuth(
                 $app['tymon.jwt.manager'],
@@ -223,7 +223,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerJWTBlacklist()
     {
-        $this->app['tymon.jwt.blacklist'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.blacklist', function ($app) {
             $instance = new Blacklist($app['tymon.jwt.provider.storage']);
 
             return $instance->setRefreshTTL($this->config('refresh_ttl'));
@@ -235,7 +235,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerPayloadValidator()
     {
-        $this->app['tymon.jwt.validators.payload'] = $this->app->share(function () {
+        $this->app->singleton('tymon.jwt.validators.payload', function () {
             return with(new PayloadValidator())->setRefreshTTL($this->config('refresh_ttl'))->setRequiredClaims($this->config('required_claims'));
         });
     }
@@ -245,7 +245,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerPayloadFactory()
     {
-        $this->app['tymon.jwt.payload.factory'] = $this->app->share(function ($app) {
+        $this->app->singleton('tymon.jwt.payload.factory', function ($app) {
             $factory = new PayloadFactory($app['tymon.jwt.claim.factory'], $app['request'], $app['tymon.jwt.validators.payload']);
 
             return $factory->setTTL($this->config('ttl'));
@@ -257,7 +257,7 @@ class JWTAuthServiceProvider extends ServiceProvider
      */
     protected function registerJWTCommand()
     {
-        $this->app['tymon.jwt.generate'] = $this->app->share(function () {
+        $this->app->singleton('tymon.jwt.generate', function () {
             return new JWTGenerateCommand();
         });
     }
