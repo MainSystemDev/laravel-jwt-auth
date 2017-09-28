@@ -149,7 +149,7 @@ class JWTAuthServiceProvider extends ServiceProvider
 
             $configBag = $app['tymon.jwt.config'];
 
-            return $app->make($provider, [$configBag]);
+            return $app->makeWith($provider, [ 'configBag' => $configBag]);
         });
     }
 
