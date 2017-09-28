@@ -11,6 +11,7 @@
 
 namespace Tymon\JWTAuth\Providers\Storage;
 
+use Psr\SimpleCache\CacheInterface as PsrCacheInterface;
 use Illuminate\Cache\CacheManager;
 
 class IlluminateCacheAdapter implements StorageInterface
@@ -85,7 +86,7 @@ class IlluminateCacheAdapter implements StorageInterface
      */
     protected function cache()
     {
-        if (! method_exists($this->cache, 'tags')) {
+        if (method_exists($this->cache, 'tags') || $this->cache instanceof PsrCacheInterface) {
             return $this->cache;
         }
 
