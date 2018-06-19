@@ -1,9 +1,6 @@
 # laravel-jwt-auth
 
-> JSON Web Token Authentication for Laravel.
-> This is just a modification from Tymon's jwt-auth to adapt _[Spomky's JOSE library](https://github.com/Spomky-Labs/jose)_  which supports JWE, JWK and JWS.
->
-> We always encourage to use https://github.com/tymondesigns/jwt-auth
+THIS WILL NOT BE MAINTAINED ANYMORE. HOWEVER, YOU MIGHT WANT TO CHECKOUT https://github.com/johnturingan/laravel-jwt
 
 ## License
 
