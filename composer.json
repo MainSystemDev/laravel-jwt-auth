@@ -1,5 +1,5 @@
 {
-    "name": "johnturingan/laravel-jwt-auth",
+    "name": "MainSystemDev/laravel-jwt-auth",
     "description": "JSON Web Token Authentication for Laravel 4 and 5. Modification from Tymon's jwt-auth",
     "keywords": [
         "jwt",
@@ -11,7 +11,7 @@
         "json web encryption",
         "jwe"
     ],
-    "homepage": "https://github.com/johnturingan/laravel-jwt-auth",
+    "homepage": "https://github.com/MainSystemDev/laravel-jwt-auth",
     "license": "MIT",
     "authors": [
         {
